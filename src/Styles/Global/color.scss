@@ -1,0 +1,31 @@
+// Grey Scale
+$white: #{'rgb(255, 255, 255)'};
+$grey-1: #{'rgb(245, 245, 245)'};
+$grey-2: rgb(219, 219, 219);
+$grey-3: rgb(189, 189, 189);
+$grey-4: rgb(117, 117, 117);
+$grey-5: rgb(89, 89, 89);
+$black: #{'rgb(0, 0, 0)'};
+
+// Background Colors
+$background__primary: rgba(255, 255, 255, 1);
+$background__primary__translucent: rgba(255, 255, 255, 0.1);
+$background__secondary: rgb(248, 248, 248); //#f8f8f8;
+$background__tertiary: rgb(229, 229, 229); //#e5e5e5;
+$background__darkBlue: #1e2c4c;
+
+// Utilities
+$utility__disabled: rgba(0, 0, 0, 0.26);
+$utility__mask: rgba(0, 0, 0, 0.4);
+$utility__halfTranslucent: rgba(0, 0, 0, 0.5);
+$utility__translucent: rgba(0, 0, 0, 0.14);
+$utility__line: rgba(0, 0, 0, 0.09);
+$utility__underlay__2: rgba(0, 0, 0, 0.05);
+$utility__underlay: rgba(0, 0, 0, 0.02);
+
+//* Text Colors
+$text__primary: rgba(0, 0, 0, 0.87);
+$text__65: rgba(0, 0, 0, 0.65);
+$text__secondary: rgba(0, 0, 0, 0.6);
+$text__40: rgba(0, 0, 0, 0.4);
+$text__disabled: rgba(0, 0, 0, 0.38);

@@ -1,0 +1,46 @@
+@import '../src//Styles/Global/color.scss';
+
+.App {
+  text-align: center;
+  background-color: $grey-2;
+  height: 100vh;
+}
+
+.OrderbookContainer {
+  margin: 0 auto;
+  width: 273px;
+  background-color: $background__darkBlue;
+
+  &__header {
+    color: $white;
+    text-align: left;
+    font-size: 15px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    box-sizing: border-box;
+    font-weight: bold;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
