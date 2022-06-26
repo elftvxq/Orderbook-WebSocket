@@ -36,12 +36,12 @@ function App() {
   const closeConnect = () => {
     ws.close();
 
-    // ws.send(
-    //   JSON.stringify({
-    //     op: 'unsubscribe',
-    //     args: ['orderBookApi:BTCPFC_0'],
-    //   })
-    // );
+    ws.send(
+      JSON.stringify({
+        op: 'unsubscribe',
+        args: ['orderBookApi:BTCPFC_0'],
+      })
+    );
 
     console.log('close connection');
   };
@@ -51,7 +51,14 @@ function App() {
       <button onClick={closeConnect}>CLOSE BUTTON</button>
 
       <div className='OrderbookContainer'>
-        <div className='OrderbookContainer__header'>Order Book</div>
+        <div className='OrderbookContainer__title'>Order Book</div>
+        <div className='OrderbookContainer__item'>
+          <div class='OrderbookContainer__item__header'>
+            <div class='OrderbookContainer__item__price'>Prize(USD)</div>
+            <div class='OrderbookContainer__item__size'>Size</div>
+            <div class='OrderbookContainer__item__total'>Total</div>
+          </div>
+        </div>
       </div>
     </div>
   );

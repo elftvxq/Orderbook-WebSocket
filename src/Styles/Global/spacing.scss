@@ -1,0 +1,14 @@
+$default_header_height: 35px;
+$homeApp_header_height: 90px;
+
+@function rem-calc($pixels, $gutter: $default-gutter) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+
+  @if (unitless($gutter)) {
+    $gutter: $gutter * 1px;
+  }
+
+  @return calc($pixels / $gutter) * 1rem;
+}

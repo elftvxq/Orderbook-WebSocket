@@ -1,4 +1,5 @@
-@import '../src//Styles/Global/color.scss';
+@import '../src/Styles/Global/color.scss';
+@import '../src/Styles/Global/spacing.scss';
 
 .App {
   text-align: center;
@@ -8,19 +9,29 @@
 
 .OrderbookContainer {
   margin: 0 auto;
-  width: 273px;
+  width: 350px;
   background-color: $background__darkBlue;
 
-  &__header {
+  &__title {
     color: $white;
     text-align: left;
     font-size: 15px;
-    height: 35px;
+    min-height: $default_header_height;
+    min-width: 100%;
     display: flex;
     align-items: center;
     padding-left: 10px;
     box-sizing: border-box;
     font-weight: bold;
+  }
+
+  &__item {
+    color: $grey-3;
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 10px 0;
+    }
   }
 }
 
