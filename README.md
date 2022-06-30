@@ -1,4 +1,4 @@
-# BTSE Webaocket API: Order Book Project
+# BTSE Websocket API: Order Book Project
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
 
