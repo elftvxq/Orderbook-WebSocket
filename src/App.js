@@ -79,9 +79,7 @@ function App() {
           totalValue += quoteDetail[i].price * quoteDetail[i].size;
         }
         if (index === 7) {
-          // console.log(accumulativeTotal, 'accumulativeTotal');
-          // 設定當前最大量紀錄
-
+          // To get the current maximum
           const newTotalBuyQuote =
             totalBuyQuotes > accumulativeTotal
               ? totalBuyQuotes
@@ -98,9 +96,6 @@ function App() {
             totalSellQuotes > accumulativeTotal
               ? totalSellQuotes
               : accumulativeTotal;
-          console.log(newTotalSellQuote, 'newTotalSellQuote');
-          console.log(totalSellQuotes, 'totalSellQuotes');
-          console.log(accumulativeTotal, 'accumulativeTotal');
 
           setTotalSellQuotes(newTotalSellQuote);
         }
@@ -111,11 +106,11 @@ function App() {
       accumulativeTotalData.accumulativeTotal = accumulativeTotal;
       accumulativeTotalData.totalValue = totalValue;
 
+      // return each quote by updated accumulativeTotal and totalValue
       return accumulativeTotalData;
     });
 
     if (!quotesResult.length) return [];
-    // closeConnect();
     return quotesResult;
   };
 
@@ -142,11 +137,9 @@ function App() {
     return num.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
   };
 
-  // console.log(totalSellQuotes, 'totalSellQuotes');
-
   useEffect(() => {
     const newQuoteUpdate = (currQuotes, oldQuotes, quoteType) => {
-      // 新的 quote data 迴圈
+      // compare current quotes with old quotes
       currQuotes.forEach((quote, index) => {
         const exist = oldQuotes.some((item) => {
           if (item.price === quote.price) {
@@ -164,21 +157,21 @@ function App() {
             setBuyQuotes(newValue);
           }
         } else {
-          // 將已存在quote的size進行比對。
+          // to find the current quote index and update the size
           const oldQuotesIndex = oldQuotes.findIndex(
             (item) => item.price === quote.price
           );
           let newValue = [...currQuotes];
 
           if (quote.size > oldQuotes[oldQuotesIndex].size) {
-            newValue[index].sizeChange = 'size-up';
+            newValue[index].sizeChange = 'size-increase';
             if (quoteType === 'sellQuotes') {
               setSellQuotes(newValue);
             } else if (quoteType === 'buyQuotes') {
               setBuyQuotes(newValue);
             }
           } else if (quote.size < oldQuotes[oldQuotesIndex].size) {
-            newValue[index].sizeChange = 'size-down';
+            newValue[index].sizeChange = 'size-decrease';
             if (quoteType === 'sellQuotes') {
               setSellQuotes(newValue);
             } else if (quoteType === 'buyQuotes') {

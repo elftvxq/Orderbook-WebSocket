@@ -107,10 +107,10 @@
       &.price {
         text-align: left;
       }
-      &.size-up {
+      &.size-increase {
         animation: sellRedAnimation 0.4s ease;
       }
-      &.size-down {
+      &.size-decrease {
         animation: buyGreenAnimation 0.4s ease;
       }
       &.total {
