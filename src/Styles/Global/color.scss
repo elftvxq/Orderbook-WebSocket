@@ -12,7 +12,12 @@ $background__primary: rgba(255, 255, 255, 1);
 $background__primary__translucent: rgba(255, 255, 255, 0.1);
 $background__secondary: rgb(248, 248, 248); //#f8f8f8;
 $background__tertiary: rgb(229, 229, 229); //#e5e5e5;
-$background__darkBlue: #1e2c4c;
+$background__darkBlue: #131b29;
+$sell-quote-accumulative-total-size-bar-color: rgba(255, 90, 90, 0.12);
+$buy-quote-accumulative-total-size-bar-color: rgba(16, 186, 104, 0.12);
+$animation-flash-green-background-color: rgba(0, 177, 93, 0.5);
+$animation-flash-red-background-color: rgba(255, 91, 90, 0.5);
+$quote-row-hover-background-color: #1e3059;
 
 // Utilities
 $utility__disabled: rgba(0, 0, 0, 0.26);
@@ -29,3 +34,25 @@ $text__65: rgba(0, 0, 0, 0.65);
 $text__secondary: rgba(0, 0, 0, 0.6);
 $text__40: rgba(0, 0, 0, 0.4);
 $text__disabled: rgba(0, 0, 0, 0.38);
+$default-text-color: #f0f4f8;
+$quote-table-head-text-color: #8698aa;
+$sell-quote-price-text-color: #ff5b5a;
+$buy-quote-price-text-color: #00b15d;
+
+@keyframes sellRedAnimation {
+  0% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: $animation-flash-red-background-color;
+  }
+}
+
+@keyframes buyGreenAnimation {
+  0% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: $animation-flash-green-background-color;
+  }
+}

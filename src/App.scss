@@ -3,19 +3,21 @@
 
 .App {
   text-align: center;
+  padding-top: rem-calc(30);
   background-color: $grey-2;
   height: 100vh;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .OrderbookContainer {
   margin: 0 auto;
-  width: 350px;
+  width: rem-calc(300);
   background-color: $background__darkBlue;
 
   &__title {
-    color: $white;
+    color: $default-text-color;
     text-align: left;
-    font-size: 15px;
+    font-size: 18px;
     min-height: $default_header_height;
     min-width: 100%;
     display: flex;
@@ -25,33 +27,150 @@
     font-weight: bold;
   }
 
-  &__item {
-    color: $grey-3;
+  &__box {
+    color: $quote-table-head-text-color;
+
     &__header {
       display: flex;
       justify-content: space-between;
-      padding: 10px 10px 0;
+      padding: 5px 10px;
+    }
+  }
+
+  &__item {
+    flex: 1 1 30%;
+    font-size: 12px;
+    text-align: right;
+
+    &.price {
+      text-align: left;
+    }
+
+    &.total {
+      flex-basis: 45%;
     }
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.QuotesContainer {
+  padding: 5px 0 4px;
+
+  &__row {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 1px 10px;
+    color: $default-text-color;
+
+    &.sell {
+      .price {
+        color: $sell-quote-price-text-color;
+      }
+      .size {
+        margin-right: 10px;
+      }
+
+      .bar {
+        background-color: $sell-quote-accumulative-total-size-bar-color;
+      }
+
+      &.new-quote {
+        background-color: $animation-flash-red-background-color;
+      }
+      &:hover {
+        background-color: $quote-row-hover-background-color;
+      }
+    }
+
+    &.buy {
+      .price {
+        color: $buy-quote-price-text-color;
+      }
+      &.new-quote {
+        background-color: $animation-flash-green-background-color;
+      }
+      .bar {
+        background-color: $buy-quote-accumulative-total-size-bar-color;
+      }
+
+      &:hover {
+        background-color: $quote-row-hover-background-color;
+      }
+    }
+
+    &__item {
+      position: relative;
+      text-align: right;
+      font-size: 13px;
+      flex: 1 1 27%;
+
+      &.price {
+        text-align: left;
+      }
+      &.size-up {
+        animation: sellRedAnimation 0.4s ease;
+      }
+      &.size-down {
+        animation: buyGreenAnimation 0.4s ease;
+      }
+      &.total {
+        overflow: hidden;
+        flex-basis: 42%;
+      }
+      .bar {
+        top: 0;
+        right: 0;
+        width: 100%;
+        position: absolute;
+        transform: translateX(100%);
+      }
+    }
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+.LastPriceContainer {
+  padding: 5px 10px;
 
-.App-link {
-  color: #61dafb;
+  &.go-up {
+    background-color: $buy-quote-accumulative-total-size-bar-color;
+    color: $buy-quote-price-text-color;
+    .arrow-icon {
+      transform-origin: center;
+      transform: rotate(180deg);
+    }
+  }
+  &.go-down {
+    background-color: $sell-quote-accumulative-total-size-bar-color;
+    color: $sell-quote-price-text-color;
+  }
+
+  &__price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $default-text-color;
+    width: 100%;
+    height: 28px;
+    line-height: 28px;
+    font-size: 16px;
+    font-weight: 600;
+
+    .arrow-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 15px;
+      height: 15px;
+      margin-left: 3px;
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height: 15px;
+    margin-left: 3px;
+  }
 }

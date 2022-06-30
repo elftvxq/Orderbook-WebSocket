@@ -1,5 +1,6 @@
 $default_header_height: 35px;
 $homeApp_header_height: 90px;
+$default-gutter: 16px;
 
 @function rem-calc($pixels, $gutter: $default-gutter) {
   @if (unitless($pixels)) {
