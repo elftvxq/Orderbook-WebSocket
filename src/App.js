@@ -174,9 +174,7 @@ function App() {
   }, [prevSellQuote, prevBuyQuote, buyQuotes, sellQuotes]);
 
   return (
-    <div className='App'>
-      {/* <button onClick={closeConnect}>CLOSE BUTTON</button> */}
-
+    <div className='Orderbook'>
       <div className='OrderbookContainer'>
         <div className='OrderbookContainer__title'>Order Book</div>
 
