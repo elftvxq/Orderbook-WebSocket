@@ -70,7 +70,7 @@
         margin-right: 10px;
       }
 
-      .bar {
+      .percentage-bar {
         background-color: $sell-quote-accumulative-total-size-bar-color;
       }
 
@@ -89,7 +89,7 @@
       &.new-quote {
         background-color: $animation-flash-green-background-color;
       }
-      .bar {
+      .percentage-bar {
         background-color: $buy-quote-accumulative-total-size-bar-color;
       }
 
@@ -117,7 +117,7 @@
         overflow: hidden;
         flex-basis: 42%;
       }
-      .bar {
+      .percentage-bar {
         top: 0;
         right: 0;
         width: 100%;

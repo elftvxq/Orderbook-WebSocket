@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import './App.scss';
+import React, { useState, useEffect } from 'react';
 import usePrevious from './Helper/usePrevious';
+import QuotesComponent from './Components/QuotesComponent';
 import { ReactComponent as ArrowIcon } from './Styles/assets/IconArrowDown.svg';
+import './App.scss';
 
 function App() {
   const [sellQuotes, setSellQuotes] = useState([]);
@@ -15,26 +16,19 @@ function App() {
   const prevSellQuote = usePrevious(sellQuotes);
   const prevBuyQuote = usePrevious(buyQuotes);
 
-  const ws = new WebSocket(`wss://ws.btse.com/ws/futures`);
-
   useEffect(() => {
-    ws.onopen = () => {
-      ws.send(
+    const webSocket = new WebSocket(`wss://ws.btse.com/ws/futures`);
+    webSocket.onopen = () => {
+      webSocket.send(
         JSON.stringify({
           op: 'subscribe',
           args: ['orderBookApi:BTCPFC_0'],
         })
       );
-
-      // console.log('sent');
     };
 
-    ws.onmessage = (event) => {
-      console.log('receive from server');
-      // console.log(event);
-
+    webSocket.onmessage = (event) => {
       let streamingData = JSON.parse(event.data);
-      console.log(streamingData, 'streamingData');
 
       if (streamingData.data) {
         const {
@@ -51,22 +45,10 @@ function App() {
         setGain(gain);
       }
     };
-    ws.onclose = () => {
+    webSocket.onclose = () => {
       console.log('close connection');
     };
   }, []);
-
-  const closeConnect = () => {
-    ws.close();
-    console.log('close connection');
-
-    ws.send(
-      JSON.stringify({
-        op: 'unsubscribe',
-        args: ['orderBookApi:BTCPFC_0'],
-      })
-    );
-  };
 
   const calculateAccumulativeTotal = (quoteDetail, quoteType) => {
     let quotesResult = quoteDetail.slice(0, 8).map((item, index) => {
@@ -205,44 +187,14 @@ function App() {
             <div className='OrderbookContainer__item total'>Total</div>
           </div>
           {/* sell quotes */}
-          <div className='QuotesContainer'>
-            {sellQuotes &&
-              sellQuotes.map((quote, index) => {
-                return (
-                  <div
-                    className={`QuotesContainer__row sell ${
-                      quote.status ? 'new-quote' : null
-                    }`}
-                    key={quote.timestamp}
-                  >
-                    <div className='QuotesContainer__row__item price'>
-                      {formatNumberWithThousandsSeparators(quote.price)}
-                    </div>
-                    <div
-                      className={`QuotesContainer__row__item size ${quote.sizeChange}`}
-                    >
-                      {formatNumberWithThousandsSeparators(quote.size)}
-                    </div>
-                    <div className='QuotesContainer__row__item total'>
-                      {formatNumberWithThousandsSeparators(
-                        quote.accumulativeTotal
-                      )}
-                      <div
-                        className='bar'
-                        style={{
-                          right: `${
-                            (quote.accumulativeTotal / totalSellQuotes) * 100
-                          }%`,
-                        }}
-                      >
-                        &nbsp;
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-          </div>
-
+          <QuotesComponent
+            type={'sell'}
+            quotesInfo={sellQuotes}
+            totalQuotes={totalSellQuotes}
+            formatNumberWithThousandsSeparators={
+              formatNumberWithThousandsSeparators
+            }
+          />
           <div className={`LastPriceContainer ${lastPriceColor()}`}>
             <div className={`LastPriceContainer__price `}>
               {lastPrice && formatNumberWithThousandsSeparators(lastPrice)}
@@ -254,44 +206,14 @@ function App() {
             </div>
           </div>
           {/* buy quotes */}
-
-          <div className='QuotesContainer'>
-            {buyQuotes &&
-              buyQuotes.map((quote, index) => {
-                return (
-                  <div
-                    className={`QuotesContainer__row buy ${
-                      quote.status ? 'new-quote' : null
-                    }`}
-                    key={quote.timestamp}
-                  >
-                    <div className='QuotesContainer__row__item price'>
-                      {formatNumberWithThousandsSeparators(quote.price)}
-                    </div>
-                    <div
-                      className={`QuotesContainer__row__item size ${quote.sizeChange}`}
-                    >
-                      {formatNumberWithThousandsSeparators(quote.size)}
-                    </div>
-                    <div className='QuotesContainer__row__item total'>
-                      {formatNumberWithThousandsSeparators(
-                        quote.accumulativeTotal
-                      )}
-                      <div
-                        className='bar'
-                        style={{
-                          right: `${
-                            (quote.accumulativeTotal / totalBuyQuotes) * 100
-                          }%`,
-                        }}
-                      >
-                        &nbsp;
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-          </div>
+          <QuotesComponent
+            type={'buy'}
+            quotesInfo={buyQuotes}
+            totalQuotes={totalBuyQuotes}
+            formatNumberWithThousandsSeparators={
+              formatNumberWithThousandsSeparators
+            }
+          />
         </div>
       </div>
     </div>
