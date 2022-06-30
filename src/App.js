@@ -53,12 +53,12 @@ function App() {
   const calculateAccumulativeTotal = (quoteDetail, quoteType) => {
     let quotesResult = quoteDetail.slice(0, 8).map((item, index) => {
       let accumulativeTotal = 0;
-      let totalValue = 0;
+      let sumUpValue = 0;
 
       if (quoteType === 'buy') {
         for (let i = index; i >= 0; i--) {
           accumulativeTotal += parseInt(quoteDetail[i].size);
-          totalValue += quoteDetail[i].price * quoteDetail[i].size;
+          sumUpValue += quoteDetail[i].price * quoteDetail[i].size;
         }
         if (index === 7) {
           // To get the current maximum
@@ -71,7 +71,7 @@ function App() {
       } else if (quoteType === 'sell') {
         for (let i = index; i < 8; i++) {
           accumulativeTotal += parseInt(quoteDetail[i].size);
-          totalValue += quoteDetail[i].price * quoteDetail[i].size;
+          sumUpValue += quoteDetail[i].price * quoteDetail[i].size;
         }
         if (index === 0) {
           const newTotalSellQuote =
@@ -86,7 +86,7 @@ function App() {
       const accumulativeTotalData = { ...item };
 
       accumulativeTotalData.accumulativeTotal = accumulativeTotal;
-      accumulativeTotalData.totalValue = totalValue;
+      accumulativeTotalData.totalValue = sumUpValue;
 
       // return each quote by updated accumulativeTotal and totalValue
       return accumulativeTotalData;
